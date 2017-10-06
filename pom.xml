@@ -40,34 +40,43 @@
         <testng.version>6.9.10</testng.version>
 
         <spring.version>4.3.10.RELEASE</spring.version>
-        <spring-test.version>4.3.10.RELEASE</spring-test.version>
 
         <spring-data-neo4j.version>4.2.6.RELEASE</spring-data-neo4j.version>
-        <neo4j-ogm-bolt-driver.version>2.1.6-SNAPSHOT</neo4j-ogm-bolt-driver.version>
+        <neo4j-ogm.version>2.1.6-SNAPSHOT</neo4j-ogm.version>
 
-        <neo4j-ogm-core.version>3.0.0</neo4j-ogm-core.version>
         <neo4j-java-driver.version>1.4.4</neo4j-java-driver.version>
 
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-releasetrain</artifactId>
+                <version>Ingalls-SR7</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.8.11</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j</artifactId>
-            <version>${spring-data-neo4j.version}</version>
         </dependency>
 
         <dependency>
@@ -79,13 +88,12 @@
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-ogm-bolt-driver</artifactId>
-            <version>${neo4j-ogm-bolt-driver.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>neo4j-java-driver</artifactId>
-                    <groupId>org.neo4j.driver</groupId>
-                </exclusion>
-            </exclusions>
+            <version>${neo4j-ogm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-core</artifactId>
+            <version>${neo4j-ogm.version}</version>
         </dependency>
 
         <!-- Slf4j -->
