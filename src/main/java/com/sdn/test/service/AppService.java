@@ -76,8 +76,9 @@ public class AppService {
 			LOG.info("{}", ownsRelationship);
 			carRepository.delete(car);
 			personRepository.delete(person);
-			ownsRepository.delete(ownsRelationship);
-			stats.deleteCount =+ 3;
+			// useless, an rel cannot exist with deleted nodes
+//			ownsRepository.delete(ownsRelationship);
+			stats.deleteCount += 2;
 		}
 		return stats;
 	}
