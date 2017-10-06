@@ -77,6 +77,8 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j</artifactId>
+            <!-- if not set will default with version defined in SD release train -->
+            <version>4.2.8.BUILD-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -155,6 +157,15 @@
             <id>spring-libs-release</id>
             <name>Spring</name>
             <url>http://repo.spring.io/libs-release</url>
+        </repository>
+
+        <repository>
+            <id>spring-libs-snapshot</id>
+            <name>Spring</name>
+            <url>http://repo.spring.io/libs-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
 
     </repositories>

@@ -33,12 +33,13 @@ public class AppService {
 	private SecureRandom random = new SecureRandom();
 
 	@Transactional(readOnly = true)
-	public Stats read(long i, Stats stats) {
+	public Stats read(long i) {
 
 		Car car = carRepository.findOne(i);
 		Person person = personRepository.findOne(i);
 		OwnsRelationship ownsRelationship = ownsRepository.findOne(i);
 
+		Stats stats = new Stats();
 		if (car != null) stats.carCount++;
 		if (person != null) stats.personCount++;
 		if (ownsRelationship != null) stats.relCount++;
@@ -46,7 +47,8 @@ public class AppService {
 	}
 
 	@Transactional
-	public Stats crud(long i, Stats stats) {
+	public Stats crud(long i) {
+		Stats stats = new Stats();
 		Person person = createPerson();
 		stats.personCount++;
 
@@ -81,7 +83,8 @@ public class AppService {
 	}
 
 	@Transactional
-	public Stats deleteById(Long id, Stats stat) {
+	public Stats deleteById(Long id) {
+		Stats stat = new Stats();
 		OwnsRelationship ownsRelationship = ownsRepository.findOne(id);
 		if( ownsRelationship != null){
 			Person person = ownsRelationship.getPerson();
