@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration name="defaultConfiguration" status="warn" strict="true" monitorInterval="5">
+    <properties>
+        <property name="patternlayout">%d [%t] %-5level %logger{36} - %msg%n%throwable{full}</property>
+        <property name="filename">sdn-test.log</property>
+        <property name="filenamePattern">sdn-test-%d{yyyy-dd-MM}-%i.log.gz</property>
+        <property name="loglevel">INFO</property>
+    </properties>
+
+    <appenders>
+        <appender name="Console" type="Console" target="SYSTEM_OUT">
+            <layout type="PatternLayout" pattern="${patternlayout}" />
+        </appender>
+        <appender name="File" type="RollingFile" fileName="${filename}" filePattern="${filenamePattern}" bufferedIO="true" immediateFlush="true" append="true">
+            <layout type="PatternLayout" pattern="${patternlayout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="30" />
+        </appender>
+    </appenders>
+
+    <loggers>
+
+        <!--<Logger name="org.neo4j.ogm.drivers" level="INFO">-->
+            <!--<AppenderRef ref="Console" />-->
+        <!--</Logger>-->
+
+        <root level="WARN">
+            <appender-ref ref="Console" />
+            <appender-ref ref="File" />
+        </root>
+    </loggers>
+</configuration>

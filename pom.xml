@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.test</groupId>
+    <artifactId>sdn-test</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <jdk.version>1.8</jdk.version>
+        <slf4j.version>1.7.6</slf4j.version>
+        <log4j2.version>2.6.1</log4j2.version>
+        <testng.version>6.9.10</testng.version>
+
+        <spring.version>4.3.10.RELEASE</spring.version>
+        <spring-test.version>4.3.10.RELEASE</spring-test.version>
+
+        <spring-data-neo4j.version>4.2.6.RELEASE</spring-data-neo4j.version>
+        <neo4j-ogm-bolt-driver.version>2.1.6-SNAPSHOT</neo4j-ogm-bolt-driver.version>
+
+        <neo4j-ogm-core.version>3.0.0</neo4j-ogm-core.version>
+        <neo4j-java-driver.version>1.4.4</neo4j-java-driver.version>
+
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-neo4j</artifactId>
+            <version>${spring-data-neo4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.neo4j.driver</groupId>
+            <artifactId>neo4j-java-driver</artifactId>
+            <version>${neo4j-java-driver.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-bolt-driver</artifactId>
+            <version>${neo4j-ogm-bolt-driver.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>neo4j-java-driver</artifactId>
+                    <groupId>org.neo4j.driver</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!-- Binding for Log4J -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <!-- Log4j API and Core implementation required for binding -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+            <version>1.2.1.RELEASE</version>
+        </dependency>
+
+    </dependencies>
+
+    <repositories>
+
+        <repository>
+            <id>neo4j</id>
+            <url>http://m2.neo4j.org/content/repositories/releases</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>neo4j-snapshots</id>
+            <url>http://m2.neo4j.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>spring-libs-release</id>
+            <name>Spring</name>
+            <url>http://repo.spring.io/libs-release</url>
+        </repository>
+
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-plugins-release</id>
+            <url>http://repo.spring.io/plugins-release</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+</project>
