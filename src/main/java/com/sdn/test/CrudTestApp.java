@@ -1,10 +1,14 @@
 package com.sdn.test;
 
+import com.sdn.test.config.AppConfig;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Properties;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class CrudTestApp {
 
@@ -12,6 +16,8 @@ public class CrudTestApp {
 
         Properties properties = new Properties();
         File file = new File("config.properties");
+
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 
         if(file.exists()) {
             try (Reader reader = new FileReader(file)) {
@@ -21,7 +27,7 @@ public class CrudTestApp {
             }
 
             String mode = args[0];
-            Neo4jRepo loadTest = new Neo4jRepo();
+            Neo4jRepo loadTest = ctx.getBean(Neo4jRepo.class);
 
             switch (mode) {
                 case "r":

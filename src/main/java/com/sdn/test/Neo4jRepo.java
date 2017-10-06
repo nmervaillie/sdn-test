@@ -1,33 +1,40 @@
 package com.sdn.test;
 
-import com.sdn.test.config.AppConfig;
 import com.sdn.test.domain.Car;
 import com.sdn.test.domain.OwnsRelationship;
 import com.sdn.test.domain.Person;
 import com.sdn.test.repository.CarRepository;
 import com.sdn.test.repository.OwnsRepository;
 import com.sdn.test.repository.PersonRepository;
-import org.neo4j.driver.v1.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.v1.exceptions.SessionExpiredException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.neo4j.driver.v1.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.v1.exceptions.SessionExpiredException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+@Component
 public class Neo4jRepo {
 
     private static final Logger LOG = LoggerFactory.getLogger(Neo4jRepo.class);
-    ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-    PersonRepository personRepository = (PersonRepository) context.getBean("personRepository");
-    CarRepository carRepository = (CarRepository) context.getBean("carRepository");
-    OwnsRepository ownsRepository = (OwnsRepository) context.getBean("ownsRepository");
+
+    @Autowired
+    PersonRepository personRepository;
+
+    @Autowired
+    CarRepository carRepository;
+
+    @Autowired
+    OwnsRepository ownsRepository;
+
     SecureRandom random = new SecureRandom();
 
 
